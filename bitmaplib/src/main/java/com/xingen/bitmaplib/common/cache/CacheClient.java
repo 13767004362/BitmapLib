@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
+import com.xingen.bitmaplib.common.net.NetUtils;
 import com.xingen.bitmaplib.common.scale.BitmapScaleUtils;
 import com.xingen.bitmaplib.common.utils.FileUtils;
 
@@ -23,6 +24,7 @@ public class CacheClient {
     private DiskLruCache diskLruCache;
 
     public CacheClient(Context context) {
+        NetUtils.HttpCacheUtils.init(context);
         this.lruCache = new BitmapLruCache();
         File directory = new File(FileUtils.getInternalCacheDir(context) + File.separator + CacheConfig.BITMAP_CACHE_FILE);
         if (!directory.exists()) {
@@ -111,7 +113,6 @@ public class CacheClient {
         }
         // 同步到日志
         this.diskLruCache.flush();
-
     }
 
     private boolean writerIO(InputStream inputStream, OutputStream outputStream) {
@@ -144,7 +145,6 @@ public class CacheClient {
         return true;
     }
 
-
     /**
      * DiskLruCache的配置
      */
@@ -158,4 +158,7 @@ public class CacheClient {
         //版本
         public static final int VERSON = 1;
     }
+
+
+
 }
