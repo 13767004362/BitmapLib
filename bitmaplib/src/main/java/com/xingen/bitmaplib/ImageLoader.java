@@ -65,6 +65,7 @@ public class ImageLoader {
             return request;
         }
         return null;
+
     }
     public void loadFileImage(ScrollImageView scrollImageView, String filePath,  int defaultImageResId, int errorImageResId) {
         scrollImageView.setDefaultImageId(defaultImageResId);
